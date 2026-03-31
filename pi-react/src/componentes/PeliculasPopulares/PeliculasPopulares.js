@@ -1,0 +1,36 @@
+import { Component } from "react";
+import CardPeliculas  from "../CardPeliculas/CardPeliculas";
+import "./PeliculasPopulares.css";
+
+
+class PeliculasPopulares extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            datos: []
+        };
+    }
+
+    componentDidMount() {   
+        fetch('https://api.themoviedb.org/3/movie/popular?api_key=e0100085153d3afdebb4302b39bad2f5')
+            .then((response) => response.json())
+            .then((data) => this.setState(
+                { datos: data.results },
+
+            ))
+            .catch((error) => console.log(error));
+    }
+
+    render() {
+        return (
+                <section className="peliculas-populares">
+                    {this.state.datos.map((dato, idx) => (
+                        <CardPeliculas key={idx} foto={dato.poster_path} nombre={dato.title} descripcion={dato.overview}/>
+                    )
+                    )}
+                </section>
+        )
+    }
+}
+
+export default PeliculasPopulares;
