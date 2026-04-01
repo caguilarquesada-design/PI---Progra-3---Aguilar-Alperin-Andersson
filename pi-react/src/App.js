@@ -1,17 +1,23 @@
 import React from 'react';
-import Header from "./componentes/Header/Header";
-import Footer from "./componentes/Footer/Footer";
+import { Route, Switch } from 'react-router-dom';
+import Header from './componentes/Header/Header';
+import Footer from './componentes/Footer/Footer';
 import Home from './componentes/Home/Home';
+import PaginaPeliculasPopulares from './componentes/PaginaPeliculasPopulares/PaginaPeliculasPopulares';
+import PaginaPeliculasCartel from './componentes/PaginaPeliculasCartel/PaginaPeliculasCartel';
 
 function App() {
   return (
     <React.Fragment>
       <Header />
-      <Home />
+      <Switch>
+        <Route path="/" exact={true} component={Home} />
+        <Route path="/peliculas-populares" component={PaginaPeliculasPopulares} />
+        <Route path="/peliculas-cartel" component={PaginaPeliculasCartel} />
+      </Switch>
       <Footer />
     </React.Fragment>
-
-  )
+  );
 }
 
 export default App;

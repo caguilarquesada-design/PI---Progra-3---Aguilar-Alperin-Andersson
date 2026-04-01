@@ -1,5 +1,5 @@
 import { Component } from "react";
-import CardPeliculas  from "../CardPeliculas/CardPeliculas";
+import CardPeliculas from "../CardPeliculas/CardPeliculas";
 import "./PeliculasPopulares.css";
 
 
@@ -11,7 +11,7 @@ class PeliculasPopulares extends Component {
         };
     }
 
-    componentDidMount() {   
+    componentDidMount() {
         fetch('https://api.themoviedb.org/3/movie/popular?api_key=e0100085153d3afdebb4302b39bad2f5')
             .then((response) => response.json())
             .then((data) => this.setState(
@@ -22,14 +22,22 @@ class PeliculasPopulares extends Component {
     }
 
     render() {
+        
+        let peliculasHome = this.state.datos.filter((dato, idx) => idx < 12);
+
         return (
-                <section className="peliculas-populares">
-                    {this.state.datos.map((dato, idx) => (
-                        <CardPeliculas key={idx} foto={dato.poster_path} nombre={dato.title} descripcion={dato.overview}/>
-                    )
-                    )}
-                </section>
-        )
+            <section className="peliculas-populares">
+                {peliculasHome.map((dato) => (
+                    <CardPeliculas
+                        key={dato.id}
+                        id={dato.id}
+                        foto={dato.poster_path}
+                        nombre={dato.title}
+                        descripcion={dato.overview}
+                    />
+                ))}
+            </section>
+        );
     }
 }
 

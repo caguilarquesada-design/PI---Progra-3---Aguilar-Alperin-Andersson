@@ -1,14 +1,13 @@
 import { Component } from "react";
-import {Link} from 'react-router-dom';
 import "./CardPeliculas.css";
 
 class CardPeliculas extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            valor: this.props.value,
             mostrar: false
-        }
+        };
+
     }
 
     verMas() {
@@ -39,24 +38,16 @@ class CardPeliculas extends Component {
                             </section>
                         )
 
-                        : <button onClick={() => this.verMas()} className='more'>Ver descripcion</button>
+                        : (
+                            <button onClick={() => this.verMas()} className='more'>Ver descripcion</button>
+                          )
 
                 }
 
-                <Link to={`/UnPersonaje/${this.props.id}`}>Mas informacion</Link>
-
                 <button>Agregar a favoritos</button>
-
-
             </article>
-
-
-
         );
     }
-
-
-
 }
 
 export default CardPeliculas;

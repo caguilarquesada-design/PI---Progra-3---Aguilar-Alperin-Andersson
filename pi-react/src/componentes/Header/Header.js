@@ -31,7 +31,7 @@ function Header(){
                         <Link to= {elemento.path}>{elemento.name}</Link>
                     </li>
                 ))}
-                <h1>HOLAAA</h1>
+                
 
             </ul>
         </nav>
