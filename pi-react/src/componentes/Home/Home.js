@@ -4,6 +4,7 @@ import Buscador from '../Buscador/Buscador';
 import PeliculasPopulares from '../PeliculasPopulares/PeliculasPopulares';
 import PeliculasCartel from "../PeliculasCartel/PeliculasCartel";
 
+
 function Home (){
     return(
         <React.Fragment>
