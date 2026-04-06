@@ -10,8 +10,8 @@ function Home (){
         <React.Fragment>
             <Buscador />
             <section>
-            <h1>Películas más populares</h1>
-            <Link to= "/peliculas-populares">Ver todas</Link>
+            <h1>Series más populares</h1>
+            <Link to= "/tv-populares">Ver todas</Link>
             <PeliculasPopulares />
             </section>
 

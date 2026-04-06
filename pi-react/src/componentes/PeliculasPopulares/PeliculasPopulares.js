@@ -12,7 +12,7 @@ class PeliculasPopulares extends Component {
     }
 
     componentDidMount() {
-        fetch('https://api.themoviedb.org/3/movie/popular?api_key=e0100085153d3afdebb4302b39bad2f5')
+        fetch('https://api.themoviedb.org/3/tv/popular?api_key=e0100085153d3afdebb4302b39bad2f5')
             .then((response) => response.json())
             .then((data) => this.setState(
                 { datos: data.results },
@@ -26,13 +26,13 @@ class PeliculasPopulares extends Component {
         let peliculasHome = this.state.datos.filter((dato, idx) => idx < 12);
 
         return (
-            <section className="peliculas-populares">
+            <section className="tv-populares">
                 {peliculasHome.map((dato) => (
                     <CardPeliculas
                         key={dato.id}
                         id={dato.id}
                         foto={dato.poster_path}
-                        nombre={dato.title}
+                        nombre={dato.name}
                         descripcion={dato.overview}
                     />
                 ))}

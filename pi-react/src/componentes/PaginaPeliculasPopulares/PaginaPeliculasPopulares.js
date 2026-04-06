@@ -16,7 +16,7 @@ class PaginaPeliculasPopulares extends Component {
     }
 
     traerPeliculas() {
-        fetch(`https://api.themoviedb.org/3/movie/popular?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
+        fetch(`https://api.themoviedb.org/3/tv/popular?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
             .then((response) => response.json())
             .then((data) => {
                 let peliculasNuevas = this.state.datos.concat(data.results);
@@ -46,7 +46,7 @@ class PaginaPeliculasPopulares extends Component {
         let peliculasFiltradas = this.state.datos.filter((dato) => {
             if (this.state.busqueda === "") {
                 return true;
-            } else if (dato.title === this.state.busqueda) {
+            } else if (dato.name === this.state.busqueda) {
                 return true;
             } else {
                 return false;
@@ -55,12 +55,12 @@ class PaginaPeliculasPopulares extends Component {
 
         return (
             <section>
-                <h1>Todas las películas populares</h1>
+                <h1>Todas las series</h1>
 
                 <form onSubmit={(event) => event.preventDefault()}>
                     <input
                         type="text"
-                        placeholder="Filtrar películas"
+                        placeholder="Filtrar"
                         onChange={(event) => this.guardarBusqueda(event)}
                         value={this.state.busqueda}
                     />
@@ -72,7 +72,7 @@ class PaginaPeliculasPopulares extends Component {
                             key={dato.id}
                             id={dato.id}
                             foto={dato.poster_path}
-                            nombre={dato.title}
+                            nombre={dato.name}
                             descripcion={dato.overview}
                         />
                     ))}

@@ -23,18 +23,46 @@ class CardPeliculas extends Component {
             mostrar: false
         })
     }
+   
+    sacarFavorito(id){
+        
+        let storagee = localStorage.getItem('pelifavorito')
+        let storageparseado = JSON.parse(storagee)
+        
+       if (storagee !== null) {
+            let nuevostoragee = storageparseado.filter(item => item !== id);
+            let valorstring1 = JSON.stringify(nuevostoragee);
+            localStorage.setItem("pelifavorito", valorstring1);
 
-    agregarFavorito() {
-        this.setState({
-            favorito: true
+       }
+    
+        this.setState ({
+        esfav: false
+    })
+}
+
+
+
+    agregarFavorito(id) {
+        let storagee = localStorage.getItem('pelifavorito')
+        let storageparseado = JSON.parse(storagee)
+        
+        if ( storageparseado == null ){
+            let primerval = [id]
+			let valorstring = JSON.stringify(primerval)
+			localStorage.setItem ("pelifavorito", valorstring)
+        } else {
+            storageparseado.push(id)
+            let valorstring = JSON.stringify( storageparseado )
+            localStorage.setItem ("pelifavorito", valorstring)
+        }
+        this.setState ( {
+            esfav: true 
         })
+
     }
 
-    sacarFavorito() {
-        this.setState({
-            favorito: false
-        })
-    }
+   
 
 
     render() {
@@ -61,12 +89,12 @@ class CardPeliculas extends Component {
                 }
 
                 {
-                    this.state.favorito ? 
+                    this.state.esfav ? 
                     (
-                        <button onClick={() => this.sacarFavorito()}>Quitar de favoritos</button>
+                        <button onClick={() => this.sacarFavorito(this.props.id)}>❤️</button>
                     )
                     : (
-                        <button onClick={() => this.agregarFavorito()}>Agregar a favoritos</button>
+                        <button onClick={() => this.agregarFavorito(this.props.id)}>🩶</button>
                     )
                 }
 

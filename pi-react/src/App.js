@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/peliculas-populares" component={PaginaPeliculasPopulares} />
+        <Route path="/tv-populares" component={PaginaPeliculasPopulares} />
         <Route path="/peliculas-cartel" component={PaginaPeliculasCartel} />
       </Switch>
       <Footer />

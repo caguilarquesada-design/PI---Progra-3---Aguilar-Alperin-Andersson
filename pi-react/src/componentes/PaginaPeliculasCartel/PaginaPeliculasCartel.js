@@ -59,7 +59,7 @@ class PaginaPeliculasCartel extends Component {
                 <form onSubmit={(event) => event.preventDefault()}>
                     <input
                         type="text"
-                        placeholder="Filtrar películas"
+                        placeholder="Filtrar"
                         onChange={(event) => this.controlarInput(event)}
                         value={this.state.filtro}
                     />

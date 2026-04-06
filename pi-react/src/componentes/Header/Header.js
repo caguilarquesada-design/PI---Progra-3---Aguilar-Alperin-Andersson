@@ -18,7 +18,7 @@ function Header(){
         },
         {
             name: "Favoritos",
-            path: "/"
+            path: "./Favoritos"
         },
 
     ]
