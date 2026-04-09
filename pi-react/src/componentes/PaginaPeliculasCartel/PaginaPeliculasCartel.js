@@ -31,7 +31,7 @@ class PaginaPeliculasCartel extends Component {
     cargarMas() {
         this.setState(
             {
-                page: this.state.pagina + 1
+                pagina: this.state.pagina + 1
             },
             () => this.traerPeliculas()
         );
