@@ -10,11 +10,9 @@ class PaginaPeliculasCartel extends Component {
             filtro: ""
         };
     }
-
     componentDidMount() {
         this.traerPeliculas();
     }
-
     traerPeliculas() {
         fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
             .then((response) => response.json())
@@ -25,13 +23,11 @@ class PaginaPeliculasCartel extends Component {
             )
             .catch((error) => console.log(error));
     }
-
     controlarInput(event) {
         this.setState({
             filtro: event.target.value
         });
     }
-
     cargarMas() {
         this.setState(
             {
@@ -40,7 +36,6 @@ class PaginaPeliculasCartel extends Component {
             () => this.traerPeliculas()
         );
     }
-
     render() {
         let peliculasFiltradas = this.state.datos.filter((dato) => {
             if (this.state.filtro === "") {
@@ -55,7 +50,6 @@ class PaginaPeliculasCartel extends Component {
         return (
             <section>
                 <h1>Todas las películas en cartel</h1>
-
                 <form onSubmit={(event) => event.preventDefault()}>
                     <input
                         type="text"
@@ -64,7 +58,6 @@ class PaginaPeliculasCartel extends Component {
                         value={this.state.filtro}
                     />
                 </form>
-
                 <section className="peliculas-populares">
                     {peliculasFiltradas.map((dato) => (
                         <CardPeliculas
@@ -76,7 +69,6 @@ class PaginaPeliculasCartel extends Component {
                         />
                     ))}
                 </section>
-
                 <button onClick={() => this.cargarMas()}>
                     Cargar más
                 </button>
