@@ -14,7 +14,7 @@ function Header(){
         },
         {
             name: "Crear cuenta",
-            path: "/"
+            path: "./Register"
         },
         {
             name: "Favoritos",

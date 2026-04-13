@@ -6,19 +6,23 @@ class PaginaPeliculasCartel extends Component {
         super(props);
         this.state = {
             datos: [],
+            backup: [],
             pagina: 1,
             filtro: ""
         };
     }
+
     componentDidMount() {
         this.traerPeliculas();
     }
+
     traerPeliculas() {
         fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
             .then((response) => response.json())
-            .then((data) =>
+            .then((data) => 
                 this.setState({
-                    datos: this.state.datos.concat(data.results)
+                    datos: this.state.datos.concat(data.results),
+                    backup: this.state.datos.concat(data.results)
                 })
             )
             .catch((error) => console.log(error));
@@ -26,7 +30,7 @@ class PaginaPeliculasCartel extends Component {
     controlarInput(event) {
         this.setState({
             filtro: event.target.value
-        });
+        }, () => this.filtrar(this.state.filtro));
     }
     cargarMas() {
         this.setState(
@@ -36,16 +40,14 @@ class PaginaPeliculasCartel extends Component {
             () => this.traerPeliculas()
         );
     }
+    filtrar(inputUsuario){
+        let peliculasFiltradas = this.state.backup.filter((dato) => dato.title.toLowerCase().includes(inputUsuario.toLowerCase()));
+        console.log('filtradas', peliculasFiltradas)
+        this.setState({datos: peliculasFiltradas})
+    }
+
     render() {
-        let peliculasFiltradas = this.state.datos.filter((dato) => {
-            if (this.state.filtro === "") {
-                return true;
-            } else if (dato.title.toLowerCase() === this.state.filtro.toLowerCase()) {
-                return true;
-            } else {
-                return false;
-            }
-        });
+       
 
         return (
             <section>
@@ -59,7 +61,7 @@ class PaginaPeliculasCartel extends Component {
                     />
                 </form>
                 <section className="peliculas-populares">
-                    {peliculasFiltradas.map((dato) => (
+                    {this.state.datos.map((dato) => (
                         <CardPeliculas
                             key={dato.id}
                             id={dato.id}

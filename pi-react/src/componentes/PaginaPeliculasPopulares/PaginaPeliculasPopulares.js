@@ -6,7 +6,8 @@ class PaginaPeliculasPopulares extends Component {
         super(props);
         this.state = {
             datos: [],
-            busqueda: "",
+            backup: [],
+            filtro: "",
             pagina: 1
         };
     }
@@ -18,19 +19,19 @@ class PaginaPeliculasPopulares extends Component {
     traerPeliculas() {
         fetch(`https://api.themoviedb.org/3/tv/popular?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
             .then((response) => response.json())
-            .then((data) => {
-                let peliculasNuevas = this.state.datos.concat(data.results);
+            .then((data) => 
                 this.setState({
-                    datos: peliculasNuevas
-                });
-            })
+                    datos: this.state.datos.concat(data.results),
+                    backup: this.state.datos.concat(data.results)
+                })
+            )
             .catch((error) => console.log(error));
     }
 
-    guardarBusqueda(event) {
+    controlarInput(event) {
         this.setState({
-            busqueda: event.target.value
-        });
+            filtro: event.target.value
+        }, () => this.filtrar(this.state.filtro));
     }
 
     cargarMas() {
@@ -42,17 +43,14 @@ class PaginaPeliculasPopulares extends Component {
         );
     }
 
-    render() {
-        let peliculasFiltradas = this.state.datos.filter((dato) => {
-            if (this.state.busqueda === "") {
-                return true;
-            } else if (dato.name === this.state.busqueda) {
-                return true;
-            } else {
-                return false;
-            }
-        });
+    filtrar(inputUsuario){
+        let seriesFiltradas = this.state.backup.filter((dato) => dato.name.toLowerCase().includes(inputUsuario.toLowerCase()));
+        console.log('filtradas', seriesFiltradas)
+        this.setState({datos: seriesFiltradas})
+    }
 
+    render() {
+        
         return (
             <section>
                 <h1>Todas las series</h1>
@@ -61,13 +59,13 @@ class PaginaPeliculasPopulares extends Component {
                     <input
                         type="text"
                         placeholder="Filtrar"
-                        onChange={(event) => this.guardarBusqueda(event)}
-                        value={this.state.busqueda}
+                        onChange={(event) => this.controlarInput(event)}
+                        value={this.state.filtro}
                     />
                 </form>
 
                 <section className="peliculas-populares">
-                    {peliculasFiltradas.map((dato) => (
+                    {this.state.datos.map((dato) => (
                         <CardPeliculas
                             key={dato.id}
                             id={dato.id}
