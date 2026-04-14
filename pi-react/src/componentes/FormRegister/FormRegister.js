@@ -30,7 +30,7 @@ class FormRegister extends Component {
         let storageParseado = JSON.parse(storageUser)
 
         if (storageUser !== null) {
-            let nuevoUser = storageParseado.filter(item => item !== id);
+            let nuevoUser = storageParseado.filter(item => item !== storageUser);
             let valorstringUser = JSON.stringify(nuevoUser);
             localStorage.setItem("username", valorstringUser)
         } else {
@@ -38,7 +38,7 @@ class FormRegister extends Component {
         }
 
         if (storageUser !== null) {
-            let nuevoUser = storageParseado.filter(item => item !== id);
+            let nuevoUser = storageParseado.filter(item => item !== storageUser);
             let valorstringUser = JSON.stringify(nuevoUser);
             localStorage.setItem("username", valorstringUser)
         }
@@ -47,22 +47,29 @@ class FormRegister extends Component {
     render() {
 
         return (
+            <React.Fragment>
+
             <form onSubmit={(event) => this.evitarSubmit(event)}>
                 <label>Usuario:</label>
-                <input type="text" onChange={(event) => this.controlaeCambios(event)} value={this.state.username}></input>
+                <input name='username' type="text" onChange={(event) => this.controlaeCambios(event)} value={this.state.username}></input>
                 <input type="submit" value="submit" />
+            </form>
 
+            <form onSubmit={(event) => this.evitarSubmit(event)}>
+            
                 <label>Email:</label>
-                <input type="email" onChange={(event) => this.controlaeCambios(event)} value={this.state.email}></input>
+                <input name='email' type="email" onChange={(event) => this.controlaeCambios(event)} value={this.state.email}></input>
                 <input type="submit" value="submit" />
-
-                <label>Contraseña:</label>
-                <input type="password" onChange={(event) => this.controlaeCambios(event)} value={this.state.contraseña}></input>
-                <input type="submit" value="submit" />
-
-
 
             </form>
+            <form onSubmit={(event) => this.evitarSubmit(event)}>
+
+                <label>Contraseña:</label>
+                <input name='password' type="password" onChange={(event) => this.controlaeCambios(event)} value={this.state.contraseña}></input>
+                <input type="submit" value="submit" />
+
+            </form>
+            </React.Fragment>
         )
     }
 }
