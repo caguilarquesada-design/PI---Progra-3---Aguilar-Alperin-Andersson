@@ -31,6 +31,7 @@ class PeliculasPopulares extends Component {
                     <CardPeliculas
                         key={dato.id}
                         id={dato.id}
+                        tipo= "tv"
                         foto={dato.poster_path}
                         nombre={dato.name}
                         descripcion={dato.overview}

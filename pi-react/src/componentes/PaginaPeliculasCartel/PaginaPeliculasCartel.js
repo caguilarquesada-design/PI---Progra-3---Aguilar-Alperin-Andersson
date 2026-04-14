@@ -11,7 +11,6 @@ class PaginaPeliculasCartel extends Component {
             filtro: ""
         };
     }
-
     componentDidMount() {
         this.traerPeliculas();
     }
@@ -48,7 +47,6 @@ class PaginaPeliculasCartel extends Component {
 
     render() {
        
-
         return (
             <section>
                 <h1>Todas las películas en cartel</h1>
@@ -65,6 +63,7 @@ class PaginaPeliculasCartel extends Component {
                         <CardPeliculas
                             key={dato.id}
                             id={dato.id}
+                            tipo="movie"
                             foto={dato.poster_path}
                             nombre={dato.title}
                             descripcion={dato.overview}

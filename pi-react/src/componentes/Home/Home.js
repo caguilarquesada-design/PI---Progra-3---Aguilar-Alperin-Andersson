@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import Buscador from '../Buscador/Buscador';
 import PeliculasPopulares from '../PeliculasPopulares/PeliculasPopulares';
 import PeliculasCartel from "../PeliculasCartel/PeliculasCartel";
-
+import Favoritos from '../Favoritos/Favoritos';
 
 function Home (){
     return(

@@ -20,14 +20,13 @@ function Header(){
             name: "Favoritos",
             path: "./Favoritos"
         },
-
     ]
 
     return(
         <nav>
             <ul className="navegador">
                 {elementos.map((elemento, idx) => (
-                    <li> 
+                    <li key={idx}> 
                         <Link to= {elemento.path}>{elemento.name}</Link>
                     </li>
                 ))}
@@ -37,6 +36,4 @@ function Header(){
         </nav>
     )
 }
-
-
 export default Header;
