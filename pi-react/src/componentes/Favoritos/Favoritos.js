@@ -22,23 +22,23 @@ class Favoritos extends Component {
                 return;
             }
 
-            for (let i = 0; i < arrayIds.length; i++) {
-                let id = arrayIds[i].id;
-                let tipo = arrayIds[i].tipo;
+            arrayIds.map((elem) => {
+                let id = elem.id;
+                let tipo = elem.tipo;
+            })
 
                 fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=${apikey}`)
                     .then((response) => response.json())
                     .then((data) => {
                         data.tipo = tipo;
 
-                        this.setState((prevState) => ({
-                            guardadosFavoritos: prevState.guardadosFavoritos.concat(data),
+                        this.setState((anterior) => ({
+                            guardadosFavoritos: anterior.guardadosFavoritos.concat(data),
                             cargando: false
                         }));
                     })
                     .catch((error) => console.log("el error fue " + error));
-            }
-        } else {
+            } else {
             this.setState({ cargando: false });
         }
     }
