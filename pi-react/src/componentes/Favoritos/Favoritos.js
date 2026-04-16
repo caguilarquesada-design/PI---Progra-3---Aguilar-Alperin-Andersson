@@ -23,8 +23,8 @@ class Favoritos extends Component {
             }
 
             arrayIds.map((elem) => {
-                let id = elem.id;
-                let tipo = elem.tipo;
+        
+                }
             })
 
                 fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=${apikey}`)

@@ -23,7 +23,9 @@ function Header(){
     ]
 
     return(
+
         <nav>
+            <img src='./img/imagenlogo.png'/>
             <ul className="navegador">
                 {elementos.map((elemento, idx) => (
                     <li key={idx}> 

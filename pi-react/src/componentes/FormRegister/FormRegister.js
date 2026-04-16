@@ -7,41 +7,54 @@ class FormRegister extends Component {
         this.state = {
             username: " ",
             email: " ",
-            contraseña: " "
+            password: " "
         };
     }
 
     evitarSubmit(event) {
         event.preventDefault();
     }
-    controlaeCambios(event) {
-        this.setState({ username: event.target.value, email: event.target.value, contraseña: event.target.value });
+    controlaeCambios(event, campo) {
+        this.setState({ 
+            [campo]: event.target.value
+        });
     }
 
     guardarDatos() {
+    
+        //Validar si el campo email tiene @, si no, retornar error
+        //Validar si el campo password tiene 6 o mas caracteres, si no retornar error
+
         const usuarioACrear = {
             username: this.state.username,
             email: this.state.email,
-            contraseña: this.state.contraseña,
+            password: this.state.password,
             createdAt: Date.now()
         }
 
-        let storageUser = localStorage.getItem('username')
+        let storageUser = localStorage.getItem('users')
         let storageParseado = JSON.parse(storageUser)
 
         if (storageUser !== null) {
-            let nuevoUser = storageParseado.filter(item => item !== storageUser);
-            let valorstringUser = JSON.stringify(nuevoUser);
-            localStorage.setItem("username", valorstringUser)
+            let emailEnUso = storageParseado.filter(item => item.email === usuarioACrear.email);
+            if(emailEnUso.lenght > 0){
+                return alert("Usuario ya registrado")
+            }
+
+            storageParseado.push(usuarioACrear)
+            let valorstringUsers = JSON.stringify(storageParseado);
+            localStorage.setItem("users", valorstringUsers)
         } else {
-            return alert("Ingrese su usuario")
+            const arrPrimerUser = [usuarioACrear]
+            // lo pasan a string y guardan en el storage en el campo users
         }
 
-        if (storageUser !== null) {
-            let nuevoUser = storageParseado.filter(item => item !== storageUser);
-            let valorstringUser = JSON.stringify(nuevoUser);
-            localStorage.setItem("username", valorstringUser)
-        }
+        // if (storageUser !== null) {
+        //     let nuevoUser = storageParseado.filter(item => item !== storageUser);
+        //     let valorstringUser = JSON.stringify(nuevoUser);
+        //     localStorage.setItem("username", valorstringUser)
+        // }
+        
     }
 
     render() {
@@ -51,21 +64,21 @@ class FormRegister extends Component {
 
             <form onSubmit={(event) => this.evitarSubmit(event)}>
                 <label>Usuario:</label>
-                <input name='username' type="text" onChange={(event) => this.controlaeCambios(event)} value={this.state.username}></input>
+                <input name='username' type="text" onChange={(event) => this.controlaeCambios(event, 'username')} value={this.state.username}></input>
                 <input type="submit" value="submit" />
             </form>
 
             <form onSubmit={(event) => this.evitarSubmit(event)}>
             
                 <label>Email:</label>
-                <input name='email' type="email" onChange={(event) => this.controlaeCambios(event)} value={this.state.email}></input>
+                <input name='email' type="email" onChange={(event) => this.controlaeCambios(event, 'email')} value={this.state.email}></input>
                 <input type="submit" value="submit" />
 
             </form>
             <form onSubmit={(event) => this.evitarSubmit(event)}>
 
                 <label>Contraseña:</label>
-                <input name='password' type="password" onChange={(event) => this.controlaeCambios(event)} value={this.state.contraseña}></input>
+                <input name='password' type="password" onChange={(event) => this.controlaeCambios(event, 'password')} value={this.state.password}></input>
                 <input type="submit" value="submit" />
 
             </form>
