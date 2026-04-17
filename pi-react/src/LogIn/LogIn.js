@@ -1,5 +1,8 @@
 import React from "react";
 import { Component } from "react";
+import Cookies from 'universal-cookie'
+
+const cookies = new Cookies()
 
 class LogIn extends Component {
     constructor(props) {
@@ -19,7 +22,6 @@ class LogIn extends Component {
     enviarForm(event) {
         event.preventDefault();
 
-        //Validamos el formato!
         if (!this.state.email.includes("@")) {
             return alert("El email debe incluir '@'")
         }
@@ -29,22 +31,33 @@ class LogIn extends Component {
         }
 
         let storageEmail = localStorage.getItem('users')
+       
+
+        if (storageEmail === null) {
+            
         let storageParseado = JSON.parse(storageEmail)
-
-        if (storageEmail !== null) {
-            let emailbuscado = storageParseado.filter(item => item.email === this.state.email);
+        let emailbuscado = storageParseado.filter(item => item.email === this.state.email);
+            
             if (emailbuscado.length > 0){
+                return alert("Usuario inexistente")
                 
-
             }
 
-        if (usuairo esta pero password no coincide){
-            //return alert("Credenciales incorrectas")
+        if (emailbuscado.password !== this.state.password){
+            return alert("Credenciales incorrectas")
         }
 
-        if (si existe y password coincide){
+        if (emailbuscado.length > 0 && emailbuscado.password === this.state.password){
+            sessionStorage.setItem('usuarioactivo')
+            cookies.set('user-auth-cookie', this.state.email)
+
+            
             //crear cookie y redirigir
 
+        }
+
+        logout(){
+            cookies.remove('user-auth-cookie')
         }
 
 
@@ -52,7 +65,6 @@ class LogIn extends Component {
         // logica de verificar si el usuario eciste o Node
         //Validar si el campo email tiene @, si no, retornar "credenciales invalidas"
         //Validar si el campo password tiene 6 o mas caracteres, si no retornar "credenciales invalidas"
-
 
         
         if (storageEmail !== null) {
@@ -65,10 +77,7 @@ class LogIn extends Component {
                 // } else {
                 return alert("Credenciales incorrectas")
         }
-
-        
     }
-
     // Recuperra el storagre
     // Buscar si el usuario existe con ese email
     // si el usuario existe, comparra las password que sean iguales a cuando se registro
@@ -76,14 +85,8 @@ class LogIn extends Component {
     //si alguno falla se le marca un error al usuario
 
 
+    render(){
 
-
-
-
-
-
-
-    render() {
         return (
             <React.Fragment>
 
@@ -111,10 +114,3 @@ class LogIn extends Component {
 }
 
 export default LogIn;
-
-
-
-
-
-
-

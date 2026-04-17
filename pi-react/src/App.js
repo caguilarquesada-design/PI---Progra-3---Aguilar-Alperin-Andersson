@@ -7,6 +7,9 @@ import PaginaPeliculasPopulares from './componentes/PaginaPeliculasPopulares/Pag
 import PaginaPeliculasCartel from './componentes/PaginaPeliculasCartel/PaginaPeliculasCartel';
 import Favoritos from './componentes/Favoritos/Favoritos';
 import FormRegister from './componentes/FormRegister/FormRegister';
+import LogIn from './componentes/LogIn/LogIn';
+
+
 
 function App() {
   return (
