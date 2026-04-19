@@ -1,8 +1,8 @@
 import React from "react";
 import { Component } from "react";
-import Cookies from 'universal-cookie'
+// import Cookies from 'universal-cookie'
 
-const cookies = new Cookies()
+// const cookies = new Cookies()
 
 class LogIn extends Component {
     constructor(props) {
@@ -31,51 +31,50 @@ class LogIn extends Component {
         }
 
         let storageEmail = localStorage.getItem('users')
-       
+
 
         if (storageEmail === null) {
-            
-        let storageParseado = JSON.parse(storageEmail)
-        let emailbuscado = storageParseado.filter(item => item.email === this.state.email);
-            
-            if (emailbuscado.length > 0){
+
+            let storageParseado = JSON.parse(storageEmail)
+            let emailbuscado = storageParseado.filter(item => item.email === this.state.email);
+
+            if (emailbuscado.length > 0) {
                 return alert("Usuario inexistente")
-                
+
             }
 
-        if (emailbuscado.password !== this.state.password){
-            return alert("Credenciales incorrectas")
-        }
-
-        if (emailbuscado.length > 0 && emailbuscado.password === this.state.password){
-            sessionStorage.setItem('usuarioactivo')
-            cookies.set('user-auth-cookie', this.state.email)
-
-            
-            //crear cookie y redirigir
-
-        }
-
-        logout(){
-            cookies.remove('user-auth-cookie')
-        }
-
-
-
-        // logica de verificar si el usuario eciste o Node
-        //Validar si el campo email tiene @, si no, retornar "credenciales invalidas"
-        //Validar si el campo password tiene 6 o mas caracteres, si no retornar "credenciales invalidas"
-
-        
-        if (storageEmail !== null) {
-            let emailbuscado = storageParseado.filter(item => item.email === this.state.email);
-            if (emailbuscado.length > 0)
-
-                //Ver si la password coincide con el mail ingresado //
-                //Si emailBuscado.length > 0 
-
-                // } else {
+            if (emailbuscado.password !== this.state.password) {
                 return alert("Credenciales incorrectas")
+            }
+
+            // if (emailbuscado.length > 0 && emailbuscado.password === this.state.password) {
+                // sessionStorage.setItem('usuarioactivo')
+                // cookies.set('user-auth-cookie', this.state.email)
+
+
+                //crear cookie y redirigir
+
+            // }
+
+
+
+
+
+            // logica de verificar si el usuario eciste o Node
+            //Validar si el campo email tiene @, si no, retornar "credenciales invalidas"
+            //Validar si el campo password tiene 6 o mas caracteres, si no retornar "credenciales invalidas"
+
+
+            if (storageEmail !== null) {
+                let emailbuscado = storageParseado.filter(item => item.email === this.state.email);
+                if (emailbuscado.length > 0)
+
+                    //Ver si la password coincide con el mail ingresado //
+                    //Si emailBuscado.length > 0 
+
+                    // } else {
+                    return alert("Credenciales incorrectas")
+            }
         }
     }
     // Recuperra el storagre
@@ -84,8 +83,13 @@ class LogIn extends Component {
     //si todo esto es correcto, CREAS LA COOKIE Y REDIRIGEN A HOME
     //si alguno falla se le marca un error al usuario
 
+    // logout() {
+       // cookies.remove('user-auth-cookie')
+    // }
 
-    render(){
+
+
+    render() {
 
         return (
             <React.Fragment>

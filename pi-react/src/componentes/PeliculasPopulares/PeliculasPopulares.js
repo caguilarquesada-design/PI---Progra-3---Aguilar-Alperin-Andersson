@@ -1,7 +1,5 @@
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
-import "./PeliculasPopulares.css";
-
 
 class PeliculasPopulares extends Component {
     constructor(props) {

@@ -1,5 +1,4 @@
 import { Component } from "react";
-import "./CardPeliculas.css";
 import { Link } from "react-router-dom";
 
 class CardPeliculas extends Component {
