@@ -1,24 +1,28 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import React from "react";
 
 class PaginaDetalle extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            datos: []
+            datos: {},
+            esfav: false
         };
     }
 
     componentDidMount() {
-        fetch(`https://api.themoviedb.org/3/movie/${this.props.id}?api_key=e0100085153d3afdebb4302b39bad2f5`)
+        let id = this.props.match.params.id;
+        let tipo = this.props.match.params.tipo;
+
+        fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=e0100085153d3afdebb4302b39bad2f5`)
             .then((response) => response.json())
             .then((data) => this.setState(
-                { datos: data.results },
+                { datos: data },
 
             ))
             .catch((error) => console.log(error));
     }
-
     sacarFavorito(id, tipo) {
 
         let storagee = localStorage.getItem('pelifavorito')
@@ -39,50 +43,55 @@ class PaginaDetalle extends Component {
     agregarFavorito(id, tipo) {
         let storagee = localStorage.getItem('pelifavorito')
         let storageparseado = JSON.parse(storagee)
+
         let nuevoFavorito = {
             id: id,
             tipo: tipo
-        }
+        };
 
         if (storageparseado == null) {
-            let primerval = [nuevoFavorito]
-            let valorstring = JSON.stringify(primerval)
-            localStorage.setItem("pelifavorito", valorstring)
-        } else {
-            storageparseado.push(nuevoFavorito)
-            let valorstring = JSON.stringify(storageparseado)
-            localStorage.setItem("pelifavorito", valorstring)
+            let primerval = [nuevoFavorito];
+            let valorstring = JSON.stringify(primerval);
+            localStorage.setItem("pelifavorito", valorstring);
+        } else{
+            let existe = storageparseado.filter(
+                item => item.id == id && item.tipo == tipo
+            );
+            if (existe.length === 0) {
+
+                storageparseado.push(nuevoFavorito);
+                let valorstring = JSON.stringify(storageparseado);
+                localStorage.setItem("pelifavorito", valorstring)
+            }
         }
         this.setState({
             esfav: true
-        })
-    }
+        }, () => this.props.history.push("/Favoritos"))
+    };
 
     render() {
         return (
             <React.Fragment>
-                <h2 class="alert alert-primary">Superman</h2>
+                <h2 class="alert alert-primary">{this.state.datos.title}</h2>
                 <section class="row">
-                    <img class="col-md-6" src="https://image.tmdb.org/t/p/w500/ombsmhYUqR4qqOLOxAyr5V8hbyv.jpg" alt="" />
-                        <section class="col-md-6 info">
-                            <h3>Descripción</h3>
-                            <p class="description">Superman, a journalist in Metropolis, embarks on a journey to reconcile his
-                                Kryptonian heritage with his human upbringing as Clark Kent.</p>
-                            <p class="mt-0 mb-0" id="release-date"><strong>Fecha de estreno:</strong> 2025-07-09</p>
-                            <p class="mt-0 mb-0 length"><strong>Duración:</strong> 130</p>
-                            <p class="mt-0" id="votes"><strong>Puntuación:</strong> 7.534</p>
-                        </section>
+                    <img class="col-md-6" src={`https://image.tmdb.org/t/p/w500${this.state.datos.poster_path}`} alt={this.state.datos.title} />
+                    <section class="col-md-6 info">
+                        <h3>Descripcion:</h3>
+                        <p class="description">{this.state.datos.overview}</p>
+                        <p class="mt-0 mb-0" id="release-date"><strong>Fecha de estreno:</strong>{this.state.datos.release_date}</p>
+                        <p class="mt-0 mb-0 length"><strong>Duración:</strong>{this.state.datos.runtime} minutos</p>
+                        <p class="mt-0" id="votes"><strong>Puntuación:</strong>{this.state.datos.vote_average}</p>
+                        {
+                            this.state.esfav ?
+                                (
+                                    <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>❤️</button>
+                                )
+                                : (
+                                    <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>🩶</button>
+                                )
+                        }
+                    </section>
                 </section>
-
-                {
-                    this.state.esfav ?
-                        (
-                            <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
-                        )
-                        : (
-                            <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
-                        )
-                }
 
             </React.Fragment>
         );

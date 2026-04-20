@@ -6,7 +6,8 @@ class CardPeliculas extends Component {
         super(props);
         this.state = {
             mostrar: false,
-            esfav: false
+            esfav: false,
+            detalle: false
         };
     }
 
@@ -57,6 +58,7 @@ class CardPeliculas extends Component {
     agregarFavorito(id, tipo) {
         let storagee = localStorage.getItem('pelifavorito')
         let storageparseado = JSON.parse(storagee)
+
         let nuevoFavorito = {
             id: id,
             tipo: tipo
@@ -67,9 +69,15 @@ class CardPeliculas extends Component {
             let valorstring = JSON.stringify(primerval)
             localStorage.setItem("pelifavorito", valorstring)
         } else {
+            let existe = storageparseado.filter(
+                item => item.id == id && item.tipo == tipo
+            )
+          if(existe.length ===0){
+
             storageparseado.push(nuevoFavorito)
             let valorstring = JSON.stringify(storageparseado)
             localStorage.setItem("pelifavorito", valorstring)
+          }     
         }
         this.setState({
             esfav: true
@@ -82,7 +90,7 @@ class CardPeliculas extends Component {
                 <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${this.props.foto}`} alt={this.props.nombre} />
                 <div className="cardBody">
                     <h2 className="card-title">{this.props.nombre}</h2>
-                    <Link to={`/detalle/${this.props.id}`}></Link>
+                    <Link to={`/detalle/${this.props.tipo}/${this.props.id}`}>Detalles</Link>   
 
                     {
                         this.state.mostrar ?
@@ -108,7 +116,6 @@ class CardPeliculas extends Component {
                     }
 
                 </div>
-
             </article>
         );
     }
