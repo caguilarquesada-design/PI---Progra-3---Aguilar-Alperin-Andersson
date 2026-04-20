@@ -1,13 +1,15 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
+import Cookies from "universal-cookie";
+
+const cookies = new Cookies()
 
 class CardPeliculas extends Component {
     constructor(props) {
         super(props);
         this.state = {
             mostrar: false,
-            esfav: false,
-            detalle: false
+            esfav: false
         };
     }
 
@@ -53,7 +55,11 @@ class CardPeliculas extends Component {
         }
         this.setState({
             esfav: false
-        })
+        });
+
+        if (this.props.borrarFav) {
+            this.props.borrarFav(id, tipo)
+        }
     }
     agregarFavorito(id, tipo) {
         let storagee = localStorage.getItem('pelifavorito')
@@ -64,20 +70,20 @@ class CardPeliculas extends Component {
             tipo: tipo
         }
 
-        if (storageparseado == null) {
+        if (storageparseado === null) {
             let primerval = [nuevoFavorito]
             let valorstring = JSON.stringify(primerval)
             localStorage.setItem("pelifavorito", valorstring)
         } else {
             let existe = storageparseado.filter(
-                item => item.id == id && item.tipo == tipo
+                item => item.id === id && item.tipo === tipo
             )
-          if(existe.length ===0){
+            if (existe.length === 0) {
 
-            storageparseado.push(nuevoFavorito)
-            let valorstring = JSON.stringify(storageparseado)
-            localStorage.setItem("pelifavorito", valorstring)
-          }     
+                storageparseado.push(nuevoFavorito)
+                let valorstring = JSON.stringify(storageparseado)
+                localStorage.setItem("pelifavorito", valorstring)
+            }
         }
         this.setState({
             esfav: true
@@ -85,12 +91,13 @@ class CardPeliculas extends Component {
     }
 
     render() {
+        let usuarioLogueado = cookies.get("user-auth-cookie");
         return (
             <article className="single-card-movie">
                 <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${this.props.foto}`} alt={this.props.nombre} />
                 <div className="cardBody">
                     <h2 className="card-title">{this.props.nombre}</h2>
-                    <Link to={`/detalle/${this.props.tipo}/${this.props.id}`}>Detalles</Link>   
+                    <Link to={`/detalle/${this.props.tipo}/${this.props.id}`}>Detalles</Link>
 
                     {
                         this.state.mostrar ?
@@ -105,15 +112,13 @@ class CardPeliculas extends Component {
                             : (
                                 <button className='btn btn-primary' onClick={() => this.verMas()} >Ver descripcion</button>
                             )}
-                    {
-                        this.state.esfav ?
-                            (
-                                <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
-                            )
-                            : (
-                                <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
-                            )
-                    }
+                    {usuarioLogueado ? (
+                        this.state.esfav ? (
+                            <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
+                        ) : (
+                            <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
+                        )
+                    ) : null}
 
                 </div>
             </article>

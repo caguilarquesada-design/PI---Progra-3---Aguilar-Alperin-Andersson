@@ -5,9 +5,9 @@ class FormRegister extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            username: " ",
-            email: " ",
-            password: " "
+            username: "",
+            email: "",
+            password: ""
         };
     }
 
@@ -44,7 +44,7 @@ class FormRegister extends Component {
         if (storageUser !== null) {
             let emailEnUso = storageParseado.filter(item => item.email === usuarioACrear.email);
 
-            if (emailEnUso.lenght > 0) {
+            if (emailEnUso.length > 0) {
                 return alert("Usuario ya registrado")
             }
 
@@ -75,17 +75,17 @@ class FormRegister extends Component {
                         }}>
                             <div className="form-group">
                                 <label>Usuario:</label>
-                                <input className="form-control" name='username' type="text" onChange={(event) => this.controlaCambios(event, 'username')} value={this.state.username}></input>
+                                <input className="form-control" name='username' type="text" onChange={(event) => this.controlaCambios(event, 'username')} value={this.state.username}/>
                             </div>
 
                             <div className="form-group">
                                 <label>Email:</label>
-                                <input className="form-control" name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
+                                <input className="form-control" name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}/>
                             </div>
 
                             <div className="form-group">
                                 <label>Contraseña:</label>
-                                <input className="form-control" name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
+                                <input className="form-control" name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}/>
                             </div>
 
                             <button className="btn btn-primary btn-block" type="submit" value="submit">Registrarse</button>

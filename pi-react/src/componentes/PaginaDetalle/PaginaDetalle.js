@@ -1,6 +1,11 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import React from "react";
+import Cookies from "universal-cookie"
+
+const cookies = new Cookies();
+
+let usuarioLog = cookies.get("user-auth-cookie");
 
 class PaginaDetalle extends Component {
     constructor(props) {
@@ -53,7 +58,7 @@ class PaginaDetalle extends Component {
             let primerval = [nuevoFavorito];
             let valorstring = JSON.stringify(primerval);
             localStorage.setItem("pelifavorito", valorstring);
-        } else{
+        } else {
             let existe = storageparseado.filter(
                 item => item.id == id && item.tipo == tipo
             );
@@ -81,6 +86,7 @@ class PaginaDetalle extends Component {
                         <p class="mt-0 mb-0" id="release-date"><strong>Fecha de estreno:</strong>{this.state.datos.release_date}</p>
                         <p class="mt-0 mb-0 length"><strong>Duración:</strong>{this.state.datos.runtime} minutos</p>
                         <p class="mt-0" id="votes"><strong>Puntuación:</strong>{this.state.datos.vote_average}</p>
+                       
                         {
                             this.state.esfav ?
                                 (

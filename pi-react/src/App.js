@@ -7,7 +7,7 @@ import PaginaPeliculasPopulares from './componentes/PaginaPeliculasPopulares/Pag
 import PaginaPeliculasCartel from './componentes/PaginaPeliculasCartel/PaginaPeliculasCartel';
 import Favoritos from './componentes/Favoritos/Favoritos';
 import FormRegister from './componentes/FormRegister/FormRegister';
-import LogIn from './componentes/LogIn/LogIn';
+import LogIn from './LogIn/LogIn';
 import PaginaDetalle from './componentes/PaginaDetalle/PaginaDetalle';
 
 
@@ -23,6 +23,7 @@ function App() {
         <Route path="/favoritos" component={Favoritos} />
         <Route path="/Register" component={FormRegister} />
         <Route path="/detalle/:tipo/:id" component={PaginaDetalle} />
+        <Route path="/login" component={LogIn} />
       </Switch>
       <Footer />
     </React.Fragment>
