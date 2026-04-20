@@ -5,36 +5,60 @@ nav {
     border-radius: 4px;
     margin-bottom: 20px;
 }
+
 .nav {
     margin: 0 !important;
 }
-.nav a{
+
+.nav a {
     color: #444;
     text-decoration: none;
 }
-.nav a:hover{
+
+.nav a:hover {
     font-weight: bold;
 }
 
-.logo{
-    height: 500px;
-    margin: 0px;
+.logo {
+    width: 300px;
+    height: auto;
+    margin-top: -70px;
+    margin-bottom: -80px;
+    margin-left: 80%;
 }
 
-.search-form, .filter-form {
+.search-form,
+.filter-form {
     padding: .5rem 0;
     margin-bottom: 20px;
     display: grid;
     grid-template-columns: 5fr 1fr;
     column-gap: 5px;
 }
+
+.btn-primary {
+    margin-left: 12px;
+    margin-bottom: 5px;
+    margin-top: -5px
+}
+
+.btn-info {
+    margin-left: 12px;
+}
+
+.btn-todas {
+    margin-left: 12px;
+}
+
 .filter-form {
     grid-template-columns: 1fr;
 }
-.search-form .btn-sm{
+
+.search-form .btn-sm {
     line-height: 1;
     font-size: 0.9rem;
 }
+
 .search-form input,
 .filter-form input {
     border: 1px solid #ccc;
@@ -45,9 +69,11 @@ nav {
     font-size: 1rem;
     padding-bottom: 4px;
 }
+
 .filter-form input {
     line-height: 1.5;
 }
+
 .cards {
     padding: 0.75rem 1.25rem;
     display: flex;
@@ -56,33 +82,42 @@ nav {
     justify-content: space-between;
     margin-bottom: 2%;
 }
+
 .cardBody {
     margin-top: 20px;
 }
+
 .single-card-people {
     width: 19%;
 }
+
 .single-card-movie {
     width: 24%;
 }
+
 .single-card-playing {
     width: 15%;
 }
-#now-playing .card-text{
+
+#now-playing .card-text {
     height: 100px;
     overflow: hidden;
 }
+
 .single-card-tv {
     width: 19%;
 }
-.tv-show .card-text{
+
+.tv-show .card-text {
     height: 100px;
     overflow: hidden;
 }
-.single-card-on-air{
+
+.single-card-on-air {
     width: 15%;
 }
-#on-air-today .card-text{
+
+#on-air-today .card-text {
     height: 100px;
     overflow: hidden;
 }
@@ -91,8 +126,72 @@ nav {
     width: 15%;
 }
 
-@media(min-width: 765px){
+@media(max-width: 765px) {
     nav {
         grid-template-columns: 1fr;
+    }
+
+    .nav {
+        padding: 10px;
+    }
+
+    .nav a {
+        display: block;
+        padding: 8px 0;
+        text-align: center;
+    }
+
+    .logo {
+        width: 200px;
+        height: auto;
+    }
+
+    .btn-primary {
+        margin-left: 12px;
+        margin-bottom: 5px;
+        margin-top: -5px
+    }
+
+    .btn-info {
+        margin-left: 12px;
+    }
+
+    .btn-todas {
+        margin-left: 12px;
+    }
+
+    .search-form {
+        grid-template-columns: 1fr;
+        row-gap: 10px;
+    }
+
+    .filter-form {
+        grid-template-columns: 1fr;
+    }
+
+    .cards {
+        padding: 10px;
+        justify-content: space-between;
+    }
+
+    .single-card-people,
+    .single-card-movie,
+    .single-card-playing,
+    .single-card-tv,
+    .single-card-on-air,
+    .all-movies .single-card-movie {
+        width: 48%;
+        margin-bottom: 15px;
+    }
+
+    #now-playing .card-text,
+    .tv-show .card-text,
+    #on-air-today .card-text {
+        height: auto;
+        overflow: visible;
+    }
+
+    .cardBody {
+        margin-top: 10px;
     }
 }

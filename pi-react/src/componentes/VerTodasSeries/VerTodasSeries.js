@@ -81,7 +81,7 @@ class PaginaPeliculasPopulares extends Component {
                         ))}
                     </section>
 
-                    <button className="btn btn-info" onClick={() => this.cargarMas()}>
+                    <button className="btn-info" onClick={() => this.cargarMas()}>
                         Cargar más
                     </button>
                 </section>

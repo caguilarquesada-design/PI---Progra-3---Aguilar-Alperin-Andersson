@@ -110,7 +110,7 @@ class CardPeliculas extends Component {
                             )
 
                             : (
-                                <button className='btn btn-primary' onClick={() => this.verMas()} >Ver descripcion</button>
+                                <button className='btn-primary' onClick={() => this.verMas()} >Ver descripcion</button>
                             )}
                     {usuarioLogueado ? (
                         this.state.esfav ? (
@@ -125,6 +125,5 @@ class CardPeliculas extends Component {
         );
     }
 }
-/*falta configrar la ruta (<Link>) para que cuando hagas click en el link te lleve a la pagina de detalle de la peliucla o serie que elegiste */
 
 export default CardPeliculas;

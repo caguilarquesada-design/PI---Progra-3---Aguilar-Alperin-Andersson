@@ -32,7 +32,7 @@ class PeliculasPopulares extends Component {
                 <Header />
                 <Buscador />
                 <h1 className='alert alert-primary'>Series más populares</h1>
-                <Link to="/tv-populares">Ver todas</Link>
+                <Link className="btn-todas" to="/tv-populares">Ver todas</Link>
                 <section className="row cards">
                     {peliculasHome.map((dato) => (
                         <CardPeliculas

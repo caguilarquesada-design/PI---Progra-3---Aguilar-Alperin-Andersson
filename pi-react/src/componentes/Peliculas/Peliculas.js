@@ -26,7 +26,7 @@ class PeliculasCartel extends Component {
             <React.Fragment>
                 
                 <h1 className='alert alert-primary'>Películas en cartel</h1>
-                <Link to="/peliculas-cartel">Ver todas</Link>
+                <Link className="btn-todas" to="/peliculas-cartel">Ver todas</Link>
                 <section className="row cards">
                     {peliculasHome.map((dato) => (
                         <CardPeliculas
