@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
 import Header from "../Header/Header";
-import Buscador from "../Buscador/Buscador";
+
 
 class VerTodasPeliculas extends Component {
     constructor(props) {
@@ -53,7 +53,6 @@ class VerTodasPeliculas extends Component {
         return (
             <React.Fragment>
                 <Header />
-                <Buscador />
                 <section>
                     <h1 className="alert alert-primary">Todas las películas en cartel</h1>
                     <form className="filter-form px-0 mb-3" onSubmit={(event) => event.preventDefault()}>

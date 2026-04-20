@@ -2,7 +2,6 @@ import React from "react";
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
 import Header from "../Header/Header";
-import Buscador from "../Buscador/Buscador";
 
 class PaginaPeliculasPopulares extends Component {
     constructor(props) {
@@ -57,7 +56,6 @@ class PaginaPeliculasPopulares extends Component {
         return (
             <React.Fragment>
                 <Header />
-                <Buscador />
                 <section>
                     <h1 className="alert alert-primary">Todas las series</h1>
 

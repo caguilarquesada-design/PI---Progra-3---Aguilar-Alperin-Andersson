@@ -1,8 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
-import Header from "../Header/Header";
-import Buscador from "../Buscador/Buscador"
 import {Link} from "react-router-dom";
 
 class PeliculasCartel extends Component {
@@ -26,8 +24,7 @@ class PeliculasCartel extends Component {
 
         return (
             <React.Fragment>
-                <Header />
-                <Buscador />
+                
                 <h1 className='alert alert-primary'>Películas en cartel</h1>
                 <Link to="/peliculas-cartel">Ver todas</Link>
                 <section className="row cards">
