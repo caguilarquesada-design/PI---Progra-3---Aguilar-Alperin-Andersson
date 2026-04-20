@@ -2,15 +2,14 @@ import React from 'react';
 import { Route, Switch } from 'react-router-dom';
 import Header from './componentes/Header/Header';
 import Footer from './componentes/Footer/Footer';
-import Home from './componentes/Home/Home';
-import PaginaPeliculasPopulares from './componentes/PaginaPeliculasPopulares/PaginaPeliculasPopulares';
-import PaginaPeliculasCartel from './componentes/PaginaPeliculasCartel/PaginaPeliculasCartel';
-import Favoritos from './componentes/Favoritos/Favoritos';
+import Home from './screens/Home/Home'
+import VerTodasSeries from './componentes/VerTodasSeries/VerTodasSeries';
+import VerTodasPeliculas from './componentes/VerTodasPeliculas/VerTodasPeliculas';
+import Favoritos from './screens/Favoritos/Favoritos';
+import SearchResults from './screens/SearchResults/SearchResults';
 import FormRegister from './componentes/FormRegister/FormRegister';
-import LogIn from './LogIn/LogIn';
-import PaginaDetalle from './componentes/PaginaDetalle/PaginaDetalle';
-
-
+import LogIn from './screens/LogIn/LogIn';
+import PaginaDetalle from './screens/PaginaDetalle/PaginaDetalle';
 
 function App() {
   return (
@@ -18,8 +17,9 @@ function App() {
       <Header />
       <Switch>
         <Route path="/" exact={true} component={Home} />
-        <Route path="/tv-populares" component={PaginaPeliculasPopulares} />
-        <Route path="/peliculas-cartel" component={PaginaPeliculasCartel} />
+        <Route path="/busqueda/:busqueda" component={SearchResults} />
+        <Route path="/tv-populares" component={VerTodasSeries} />
+        <Route path="/peliculas-cartel" component={VerTodasPeliculas} />
         <Route path="/favoritos" component={Favoritos} />
         <Route path="/Register" component={FormRegister} />
         <Route path="/detalle/:tipo/:id" component={PaginaDetalle} />

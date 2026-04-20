@@ -1,6 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import CardPeliculas from "../CardPeliculas/CardPeliculas";
+import CardPeliculas from "../../componentes/CardPeliculas/CardPeliculas";
 import Cookies from "universal-cookie";
 
 const cookies = new Cookies()

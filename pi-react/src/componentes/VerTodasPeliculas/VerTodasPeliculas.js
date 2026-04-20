@@ -1,7 +1,7 @@
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
 
-class PaginaPeliculasCartel extends Component {
+class VerTodasPeliculas extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -77,7 +77,7 @@ class PaginaPeliculasCartel extends Component {
         );
     }
 }
-export default PaginaPeliculasCartel;
+export default VerTodasPeliculas;
 
 
 

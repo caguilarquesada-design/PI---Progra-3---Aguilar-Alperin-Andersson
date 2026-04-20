@@ -1,8 +1,8 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import Buscador from '../Buscador/Buscador';
-import PeliculasPopulares from '../PeliculasPopulares/PeliculasPopulares';
-import PeliculasCartel from "../PeliculasCartel/PeliculasCartel";
+import Buscador from '../../componentes/Buscador/Buscador';
+import Series from '../../componentes/Series/Series';
+import Peliculas from '../../componentes/Peliculas/Peliculas'
 import Favoritos from '../Favoritos/Favoritos';
 
 function Home (){
@@ -12,13 +12,13 @@ function Home (){
             <section>
             <h1 className='alert alert-primary'>Series más populares</h1>
             <Link to= "/tv-populares">Ver todas</Link>
-            <PeliculasPopulares />
+            <Series />
             </section>
 
             <section>
             <h1 className='alert alert-primary'>Películas en cartel</h1>
-            <Link to = "/peliculas-cartel">Ver todas</Link>
-            <PeliculasCartel />
+            <Link to = "/peliculas-cartel">Ver todas</Link> 
+            <Peliculas />
             </section>
 
         </React.Fragment>
@@ -27,3 +27,5 @@ function Home (){
 }
 
 export default Home;
+
+// cambiar aca los links si es necesario
