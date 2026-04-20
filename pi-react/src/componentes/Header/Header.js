@@ -25,10 +25,10 @@ function Header(){
 
         <nav>
             <img src='./img/imagenlogo.png'/>
-            <ul className="navegador">
+            <ul className="nav nav-tabs my-4">
                 {elementos.map((elemento, idx) => (
-                    <li key={idx}> 
-                        <Link to= {elemento.path}>{elemento.name}</Link>
+                    <li className='nav-item' key={idx}> 
+                        <Link className="nav-link" to= {elemento.path}>{elemento.name}</Link>
                     </li>
                 ))}
                 

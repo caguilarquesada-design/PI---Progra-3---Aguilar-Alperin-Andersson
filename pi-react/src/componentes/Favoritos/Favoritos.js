@@ -44,16 +44,15 @@ class Favoritos extends Component {
         }}
         render() {
             return (
-                <div className="container mt-5">
-                    <h2>Mis Favoritos</h2>
-                    <hr />
+                <div>
+                    <h2 className="alert alert-primary">Mis Favoritos</h2>
 
                     {this.state.cargando ? (
                         <h3>Cargando...</h3>
                     ) : this.state.guardadosFavoritos.length === 0 ? (
                         <div className="alert alert-info mt-4">No hay favoritos guardados.</div>
                     ) : (
-                        <section className="row mt-4">
+                        <section className="row cards" id='movies'>
                             {this.state.guardadosFavoritos.map((item, idx) => {
                                 let tituloMostrar = item.title ? item.title : item.name;
 

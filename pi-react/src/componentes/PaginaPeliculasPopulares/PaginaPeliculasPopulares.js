@@ -53,7 +53,7 @@ class PaginaPeliculasPopulares extends Component {
         
         return (
             <section>
-                <h1>Todas las series</h1>
+                <h1 className="alert alert-primary">Todas las series</h1>
 
                 <form onSubmit={(event) => event.preventDefault()}>
                     <input
@@ -64,7 +64,7 @@ class PaginaPeliculasPopulares extends Component {
                     />
                 </form>
 
-                <section className="peliculas-populares">
+                <section className="row cards">
                     {this.state.datos.map((dato) => (
                         <CardPeliculas
                             key={dato.id}

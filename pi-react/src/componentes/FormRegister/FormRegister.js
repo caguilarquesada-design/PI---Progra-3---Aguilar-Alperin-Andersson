@@ -66,28 +66,45 @@ class FormRegister extends Component {
 
         return (
             <React.Fragment>
+                <h2 className="alert alert-primary">Registro</h2>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <form onSubmit={(event) => {
+                            event.preventDefault();
+                            this.guardarDatos();
+                        }}>
+                            <div className="form-group">
+                                <label>Usuario:</label>
+                                <input className="form-control" name='username' type="text" onChange={(event) => this.controlaCambios(event, 'username')} value={this.state.username}></input>
+                            </div>
 
-                <form onSubmit={(event) => {
-                    event.preventDefault();
-                    this.guardarDatos();
-                }}>
+                            <div className="form-group">
+                                <label>Email:</label>
+                                <input className="form-control" name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
+                            </div>
 
-                    <label>Usuario:</label>
-                    <input name='username' type="text" onChange={(event) => this.controlaCambios(event, 'username')} value={this.state.username}></input>
+                            <div className="form-group">
+                                <label>Contraseña:</label>
+                                <input className="form-control" name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
+                            </div>
 
-                    <label>Email:</label>
-                    <input name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
-                    
-                    <label>Contraseña:</label>
-                    <input name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
+                            <button className="btn btn-primary btn-block" type="submit" value="submit">Registrarse</button>
 
-                    <input type="submit" value="submit" />
+                        </form>
 
-                </form>
+                        <p className="mt-3 text-center">¿Ya tenés cuenta? </p>
+                        
+
+                    </div>
+                </div>
+
+
             </React.Fragment>
         )
     }
 
 }
+
+// agregar que te rediriga a login!
 
 export default FormRegister; 

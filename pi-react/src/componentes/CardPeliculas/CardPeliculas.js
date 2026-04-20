@@ -78,33 +78,37 @@ class CardPeliculas extends Component {
 
     render() {
         return (
-            <article className='card-pelicula'>
-                <img src={`https://image.tmdb.org/t/p/w342/${this.props.foto}`} alt={this.props.nombre} />
-                <h2>{this.props.nombre}</h2>
-                <Link to={`/detalle/${this.props.id}`}></Link>
+            <article className="single-card-movie">
+                <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${this.props.foto}`} alt={this.props.nombre} />
+                <div className="cardBody">
+                    <h2 className="card-title">{this.props.nombre}</h2>
+                    <Link to={`/detalle/${this.props.id}`}></Link>
 
-                {
-                    this.state.mostrar ?
-                        (
-                            <section className='extra'>
-                                <p>{this.props.descripcion}</p>
+                    {
+                        this.state.mostrar ?
+                            (
+                                <section className='extra'>
+                                    <p className="card-text">{this.props.descripcion}</p>
 
-                                <button onClick={() => this.verMenos()} className='delete'>Ver menos</button>
-                            </section>
-                        )
+                                    <button className="btn btn-primary" onClick={() => this.verMenos()} >Ver menos</button>
+                                </section>
+                            )
 
-                        : (
-                            <button onClick={() => this.verMas()} className='more'>Ver descripcion</button>
-                        )}
-                {
-                    this.state.esfav ?
-                        (
-                            <button onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
-                        )
-                        : (
-                            <button onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
-                        )
-                }
+                            : (
+                                <button className='btn btn-primary' onClick={() => this.verMas()} >Ver descripcion</button>
+                            )}
+                    {
+                        this.state.esfav ?
+                            (
+                                <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
+                            )
+                            : (
+                                <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
+                            )
+                    }
+
+                </div>
+
             </article>
         );
     }

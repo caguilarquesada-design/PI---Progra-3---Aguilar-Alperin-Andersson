@@ -47,14 +47,14 @@ class LogIn extends Component {
                 return alert("Credenciales incorrectas")
             }
 
-            // if (emailbuscado.length > 0 && emailbuscado.password === this.state.password) {
-                // sessionStorage.setItem('usuarioactivo')
-                // cookies.set('user-auth-cookie', this.state.email)
+            if (emailbuscado.length > 0 && emailbuscado.password === this.state.password) {
+                sessionStorage.setItem('usuarioactivo')
+                //cookies.set('user-auth-cookie', this.state.email)
 
 
                 //crear cookie y redirigir
 
-            // }
+            }
 
 
 
@@ -84,7 +84,7 @@ class LogIn extends Component {
     //si alguno falla se le marca un error al usuario
 
     // logout() {
-       // cookies.remove('user-auth-cookie')
+    // cookies.remove('user-auth-cookie')
     // }
 
 
@@ -93,24 +93,39 @@ class LogIn extends Component {
 
         return (
             <React.Fragment>
+                <h2 className="alert alert-primary">Iniciar sesión</h2>
 
-                <form onSubmit={(event) => {
-                    event.preventDefault();
-                    this.guardarDatos();
-                }}>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                        <form onSubmit={(event) => {
+                            event.preventDefault();
+                            this.guardarDatos();
+                        }}>
+                            <div className="form-group">
+                                <label>Usuario:</label>
+                                <input name='username' type="text" onChange={(event) => this.controlaCambios(event, 'username')} value={this.state.username}></input>
+                            </div>
 
-                    <label>Usuario:</label>
-                    <input name='username' type="text" onChange={(event) => this.controlaCambios(event, 'username')} value={this.state.username}></input>
+                            <div className="form-group">
+                                <label>Email:</label>
+                                <input name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
+                            </div>
 
-                    <label>Email:</label>
-                    <input name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
+                            <div className="form-group">
+                                <label>Contraseña:</label>
+                                <input name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
+                            </div>
 
-                    <label>Contraseña:</label>
-                    <input name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
+                            <button className="btn btn-primary btn-block" type="submit" value="submit">Log in</button>
 
-                    <input type="submit" value="submit" />
+                        </form>
 
-                </form>
+                        <p class="mt-3 text-center">¿No tenés cuenta? <a href="register.html">Registrarse</a></p>
+
+                    </div>
+                </div>
+
+
             </React.Fragment>
         )
 
@@ -118,3 +133,5 @@ class LogIn extends Component {
 }
 
 export default LogIn;
+
+//ACOMODAR LO DE "NO TENES CUENTA"

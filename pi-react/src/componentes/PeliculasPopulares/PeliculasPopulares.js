@@ -24,7 +24,7 @@ class PeliculasPopulares extends Component {
         let peliculasHome = this.state.datos.filter((dato, idx) => idx < 12);
 
         return (
-            <section className="tv-populares">
+            <section className="row cards">
                 {peliculasHome.map((dato) => (
                     <CardPeliculas
                         key={dato.id}
