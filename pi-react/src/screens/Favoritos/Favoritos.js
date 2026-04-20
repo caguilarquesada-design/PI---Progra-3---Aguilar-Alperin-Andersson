@@ -106,7 +106,7 @@ sacarDelState(id, tipo){
                             })}
                         </section>
 
-                        <h3>Series favoritas</h3>
+                        <h2 className="alert alert-primary">Series favoritas</h2>
                         <section className="row cards" id='movies'>
                             {this.state.guardadosSeries.map((item, idx) => {
                                 let tituloMostrar = item.title ? item.title : item.name;

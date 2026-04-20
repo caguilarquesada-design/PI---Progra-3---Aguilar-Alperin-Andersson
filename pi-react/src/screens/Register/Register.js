@@ -8,7 +8,6 @@ function Register() {
     <React.Fragment>
       <Header />
       <Switch>
-        <h1>REGISTRARSE</h1>
         <Route path="/Register" component={FormRegister} />
       </Switch>
       <Footer />

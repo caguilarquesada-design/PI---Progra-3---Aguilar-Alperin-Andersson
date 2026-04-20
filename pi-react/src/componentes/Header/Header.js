@@ -13,6 +13,8 @@ class Header extends Component {
         };
     }
 
+
+
     componentDidMount() {
         this.setState({
             usuarioLog: cookies.get("user-auth-cookie")

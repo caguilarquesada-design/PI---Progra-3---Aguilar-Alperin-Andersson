@@ -55,7 +55,7 @@ class PaginaPeliculasPopulares extends Component {
             <section>
                 <h1 className="alert alert-primary">Todas las series</h1>
 
-                <form onSubmit={(event) => event.preventDefault()}>
+                <form className="filter-form px-0 mb-3" onSubmit={(event) => event.preventDefault()}>
                     <input
                         type="text"
                         placeholder="Filtrar"
@@ -64,7 +64,7 @@ class PaginaPeliculasPopulares extends Component {
                     />
                 </form>
 
-                <section className="row cards">
+                <section className="row cards all-movies">
                     {this.state.datos.map((dato) => (
                         <CardPeliculas
                             key={dato.id}
@@ -77,7 +77,7 @@ class PaginaPeliculasPopulares extends Component {
                     ))}
                 </section>
 
-                <button onClick={() => this.cargarMas()}>
+                <button className="btn btn-info" onClick={() => this.cargarMas()}>
                     Cargar más
                 </button>
             </section>

@@ -96,7 +96,7 @@ class CardPeliculas extends Component {
             <article className="single-card-movie">
                 <img className="card-img-top" src={`https://image.tmdb.org/t/p/w342/${this.props.foto}`} alt={this.props.nombre} />
                 <div className="cardBody">
-                    <h2 className="card-title">{this.props.nombre}</h2>
+                    <h5 className="card-title">{this.props.nombre}</h5>
                     <Link to={`/detalle/${this.props.tipo}/${this.props.id}`}>Detalles</Link>
 
                     {
@@ -114,9 +114,9 @@ class CardPeliculas extends Component {
                             )}
                     {usuarioLogueado ? (
                         this.state.esfav ? (
-                            <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
+                            <button className="btn alert-primary" onClick={() => this.sacarFavorito(this.props.id, this.props.tipo)}>❤️</button>
                         ) : (
-                            <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
+                            <button className="btn alert-primary" onClick={() => this.agregarFavorito(this.props.id, this.props.tipo)}>🩶</button>
                         )
                     ) : null}
 

@@ -50,7 +50,7 @@ class VerTodasPeliculas extends Component {
         return (
             <section>
                 <h1 className="alert alert-primary">Todas las películas en cartel</h1>
-                <form onSubmit={(event) => event.preventDefault()}>
+                <form className="filter-form px-0 mb-3" onSubmit={(event) => event.preventDefault()}>
                     <input
                         type="text"
                         placeholder="Filtrar"
@@ -58,7 +58,7 @@ class VerTodasPeliculas extends Component {
                         value={this.state.filtro}
                     />
                 </form>
-                <section className="row cards" id="movies">
+                <section className="row cards all-movies" id="movies">
                     {this.state.datos.map((dato) => (
                         <CardPeliculas
                             key={dato.id}
@@ -70,7 +70,7 @@ class VerTodasPeliculas extends Component {
                         />
                     ))}
                 </section>
-                <button onClick={() => this.cargarMas()}>
+                <button className="btn btn-info" onClick={() => this.cargarMas()}>
                     Cargar más
                 </button>
             </section>

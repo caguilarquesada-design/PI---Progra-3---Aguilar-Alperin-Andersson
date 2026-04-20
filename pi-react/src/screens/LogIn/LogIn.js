@@ -1,6 +1,7 @@
 import { Component } from "react";
 import Cookies from 'universal-cookie'
 import React from "react";
+import { Link } from 'react-router-dom'
 
 const cookies = new Cookies()
 
@@ -66,25 +67,34 @@ class LogIn extends Component {
         return (
             <React.Fragment>
 
+                <h2 className="alert alert-primary">Iniciar sesión</h2>
+                <div className="row justify-content-center">
+                    <div className="col-md-6">
+                   
+
                 <form onSubmit={(event) => {
                     this.enviarForm(event)}}>
-                    <div>
+                    
+                    <div className="form-group">
                         <label>Email:</label>
-                        <input name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
+                        <input className="form-control" name='email' type="email" onChange={(event) => this.controlaCambios(event, 'email')} value={this.state.email}></input>
                     </div>
 
-                    <div>
+                    <div className="form-group">
                         <label>Contraseña:</label>
-                        <input name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
+                        <input className="form-control" name='password' type="password" onChange={(event) => this.controlaCambios(event, 'password')} value={this.state.password}></input>
                     </div>
 
 
-                    <button type="submit" value="submit">Iniciar sesion</button>
-                    <button type="button" value="submit" onClick={()=> this.logout()}>Log out</button>
-
-
+                    <button className="btn btn-primary btn-block" type="submit" value="submit">Iniciar sesion</button>
+                    <button className="btn btn-primary btn-block" type="button" value="submit" onClick={()=> this.logout()}>Log out</button>
 
                 </form>
+                <p>
+                    <Link className="mt-3 text-center" to="/Register">Ya tenes cuenta?</Link>
+                </p>
+                </div>
+                </div>
             </React.Fragment>
         )
 

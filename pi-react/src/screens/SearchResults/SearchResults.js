@@ -49,10 +49,10 @@ class SearchResults extends Component {
         
         return (
             <div>
-                <h3>Resultados para: {busqueda}</h3>
+                <h3 className="alert alert-primary">Resultados para: {busqueda}</h3>
 
-                <section className="cards">
-                    {this.state.pelis.length === 0 ? (<h3>No hay reultados</h3>) : (this.state.pelis.map((pelicula) => (
+                <section className="row cards" id="movies">
+                    {this.state.pelis.length === 0 ? (<h3 className="alert alert-primary">No hay reultados</h3>) : (this.state.pelis.map((pelicula) => (
                         <React.Fragment>
                             <CardPeliculas
                                 key={pelicula.id}
@@ -68,8 +68,8 @@ class SearchResults extends Component {
                     ))
                     )}
                 </section>
-                <section className="cards">
-                    {this.state.series.length === 0 ? (<h3>No hay resultados</h3>) : (this.state.series.map((serie) => (
+                <section className="row cards" id="movies">
+                    {this.state.series.length === 0 ? (<h3 className="alert alert-primary">No hay resultados</h3>) : (this.state.series.map((serie) => (
                         <React.Fragment>
                             <CardPeliculas
                                 key={serie.id}
