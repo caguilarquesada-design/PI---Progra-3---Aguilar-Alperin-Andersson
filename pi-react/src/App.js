@@ -1,6 +1,5 @@
 import React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import Header from './componentes/Header/Header';
 import Footer from './componentes/Footer/Footer';
 import Home from './screens/Home/Home'
 import VerTodasSeries from './componentes/VerTodasSeries/VerTodasSeries';
@@ -14,7 +13,6 @@ import PaginaDetalle from './screens/PaginaDetalle/PaginaDetalle';
 function App() {
   return (
     <React.Fragment>
-      <Header />
       <Switch>
         <Route path="/" exact={true} component={Home} />
         <Route path="/busqueda/:busqueda" component={SearchResults} />

@@ -1,7 +1,8 @@
 import { Component } from "react";
 import Cookies from 'universal-cookie'
 import React from "react";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import Header from "../../componentes/Header/Header";
 
 const cookies = new Cookies()
 
@@ -66,6 +67,7 @@ class LogIn extends Component {
 
         return (
             <React.Fragment>
+                <Header />
 
                 <h2 className="alert alert-primary">Iniciar sesión</h2>
                 <div className="row justify-content-center">
@@ -96,8 +98,7 @@ class LogIn extends Component {
                 </div>
                 </div>
             </React.Fragment>
-        )
-
+        );
     }
 }
 

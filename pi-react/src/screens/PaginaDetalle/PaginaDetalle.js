@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import React from "react";
 import Cookies from "universal-cookie"
 import CargandoResults from "../../componentes/CargandoResults/CargandoResults";
+import Header from "../../componentes/Header/Header";
+import Buscador from "../../componentes/Buscador/Buscador";
 
 const cookies = new Cookies();
 
@@ -18,23 +20,40 @@ class PaginaDetalle extends Component {
     }
 
     componentDidMount() {
-        let id = this.props.match.params.id;
+        let id = Number(this.props.match.params.id);
         let tipo = this.props.match.params.tipo;
+
+        let favoritos = localStorage.getItem("pelifavorito");
+        let esFavorito = false;
+
+        if (favoritos !== null) {
+            let arrayIds = JSON.parse(favoritos);
+
+            let existe = arrayIds.filter(
+                item => item.id === id && item.tipo === tipo
+            );
+
+            if (existe.length > 0) {
+                esFavorito = true;
+            }
+        }
 
         fetch(`https://api.themoviedb.org/3/${tipo}/${id}?api_key=e0100085153d3afdebb4302b39bad2f5`)
             .then((response) => response.json())
             .then((data) => this.setState({
                 datos: data,
                 generos: data.genres,
+                esfav: esFavorito,
                 cargando: false
             }))
             .catch((error) => console.log(error));
     }
 
     sacarFavorito(id, tipo) {
+        id = Number(id);
 
-        let storagee = localStorage.getItem('pelifavorito')
-        let storageparseado = JSON.parse(storagee)
+        let storagee = localStorage.getItem("pelifavorito");
+        let storageparseado = JSON.parse(storagee);
 
         if (storagee !== null) {
             let nuevostoragee = storageparseado.filter(
@@ -43,17 +62,19 @@ class PaginaDetalle extends Component {
             let valorstring1 = JSON.stringify(nuevostoragee);
             localStorage.setItem("pelifavorito", valorstring1);
         }
+
         this.setState({
             esfav: false
-        })
+        });
     }
 
     agregarFavorito(id, tipo) {
-        let storagee = localStorage.getItem('pelifavorito')
-        let storageparseado = JSON.parse(storagee)
+
+        let storagee = localStorage.getItem("pelifavorito");
+        let storageparseado = JSON.parse(storagee);
 
         let nuevoFavorito = {
-            id: id,
+            id: Number(id),
             tipo: tipo
         };
 
@@ -63,14 +84,16 @@ class PaginaDetalle extends Component {
             localStorage.setItem("pelifavorito", valorstring);
         } else {
             let existe = storageparseado.filter(
-                item => item.id == id && item.tipo == tipo
+                item => item.id === id && item.tipo === tipo
             );
+
             if (existe.length === 0) {
                 storageparseado.push(nuevoFavorito);
                 let valorstring = JSON.stringify(storageparseado);
-                localStorage.setItem("pelifavorito", valorstring)
+                localStorage.setItem("pelifavorito", valorstring);
             }
         }
+
         this.setState({
             esfav: true
         });
@@ -84,63 +107,67 @@ class PaginaDetalle extends Component {
         if (this.state.cargando) {
             return <CargandoResults />
         }
+        return (
+            <React.Fragment>
+                <Header />
+                <Buscador />
 
-        if (tipo === "movie") {
-            return (
-                <section>
-                    <h2 className="alert alert-primary">{this.state.datos.title}</h2>
-                    <section className="row">
-                        <img className="col-md-6" src={`https://image.tmdb.org/t/p/w500${this.state.datos.poster_path}`} alt={this.state.datos.title} />
-                        <section className="col-md-6 info">
-                            <h3>Descripcion:</h3>
-                            <p className="description">{this.state.datos.overview}</p>
-                            <p className="mt-0 mb-0" id="release-date"><strong>Fecha de estreno: </strong>{this.state.datos.release_date}</p>
-                            <p className="mt-0 mb-0 length"><strong>Duración: </strong>{this.state.datos.runtime} minutos</p>
-                            <p className="mt-0" id="votes"><strong>Puntuación: </strong>{this.state.datos.vote_average}</p>
-                            <p className="mt-0 mb-0" id="release-date"><strong>Generos: </strong></p>
-                            {this.state.generos.map((genero) => (
-                                <li key={genero.id}>{genero.name}</li>
-                            ))}
+                {tipo === "movie" ? (
+                    <section>
+                        <h2 className="alert alert-primary">{this.state.datos.title}</h2>
+                        <section className="row">
+                            <img className="col-md-6" src={`https://image.tmdb.org/t/p/w500${this.state.datos.poster_path}`} alt={this.state.datos.title} />
+                            <section className="col-md-6 info">
+                                <h3>Descripcion:</h3>
+                                <p className="description">{this.state.datos.overview}</p>
+                                <p className="mt-0 mb-0" id="release-date"><strong>Fecha de estreno: </strong>{this.state.datos.release_date}</p>
+                                <p className="mt-0 mb-0 length"><strong>Duración: </strong>{this.state.datos.runtime} minutos</p>
+                                <p className="mt-0" id="votes"><strong>Puntuación: </strong>{this.state.datos.vote_average}</p>
+                                <p className="mt-0 mb-0" id="release-date"><strong>Generos: </strong></p>
+                                {this.state.generos.map((genero) => (
+                                    <li key={genero.id}>{genero.name}</li>
+                                ))}
 
-                            {usuarioLog ? (
-                                this.state.esfav ?
-                                    <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>❤️</button>
-                                    :
-                                    <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>🩶</button>
-                            ) : null}
+                                {usuarioLog ? (
+                                    this.state.esfav ?
+                                        <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>❤️</button>
+                                        :
+                                        <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>🩶</button>
+                                ) : null}
+                            </section>
                         </section>
                     </section>
-                </section>
 
-            )
-        } else {
-            return (
-                <section>
-                    <h2 className="alert alert-primary">{this.state.datos.name}</h2>
-                    <section className="row">
-                        <img className="col-md-6" src={`https://image.tmdb.org/t/p/w500${this.state.datos.poster_path}`} alt={this.state.datos.name} />
-                        <section className="col-md-6 info">
-                            <h3>Descripcion:</h3>
-                            <p className="description">{this.state.datos.overview}</p>
-                            <p className="mt-0 mb-0" id="release-date"><strong>Fecha de estreno: </strong>{this.state.datos.first_air_date}</p>
-                            <p className="mt-0" id="votes"><strong>Puntuación: </strong>{this.state.datos.vote_average}</p>
-                            <p className="mt-0 mb-0" id="release-date"><strong>Generos: </strong></p>
-                            {this.state.generos.map((genero, idx) => (
-                                <li key={genero.id}>{genero.name}</li>
-                            ))}
-                            {usuarioLog ? (
-                                this.state.esfav ?
-                                    <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>❤️</button>
-                                    :
-                                    <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>🩶</button>
-                            ) : null}
+                ) : (
+                    <section>
+                        <h2 className="alert alert-primary">{this.state.datos.name}</h2>
+                        <section className="row">
+                            <img className="col-md-6" src={`https://image.tmdb.org/t/p/w500${this.state.datos.poster_path}`} alt={this.state.datos.name} />
+                            <section className="col-md-6 info">
+                                <h3>Descripcion:</h3>
+                                <p className="description">{this.state.datos.overview}</p>
+                                <p className="mt-0 mb-0" id="release-date"><strong>Fecha de estreno: </strong>{this.state.datos.first_air_date}</p>
+                                <p className="mt-0" id="votes"><strong>Puntuación: </strong>{this.state.datos.vote_average}</p>
+                                <p className="mt-0 mb-0" id="release-date"><strong>Generos: </strong></p>
+                                {this.state.generos.map((genero, idx) => (
+                                    <li key={genero.id}>{genero.name}</li>
+                                ))}
+                                {usuarioLog ? (
+                                    this.state.esfav ?
+                                        <button className="btn btn-primary" onClick={() => this.sacarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>❤️</button>
+                                        :
+                                        <button className="btn btn-primary" onClick={() => this.agregarFavorito(this.props.match.params.id, this.props.match.params.tipo)}>🩶</button>
+                                ) : null}
 
+                            </section>
                         </section>
                     </section>
-                </section>
 
-            )
-        }
+                )}
+
+            </React.Fragment>
+
+        )
     }
 }
 

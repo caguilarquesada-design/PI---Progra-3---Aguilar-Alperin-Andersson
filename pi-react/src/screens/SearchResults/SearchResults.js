@@ -1,9 +1,9 @@
 import React from "react";
 import { Component } from "react";
 import CardPeliculas from "../../componentes/CardPeliculas/CardPeliculas";
-import Header from "../../componentes/Header/Header";
 import CargandoResults from "../../componentes/CargandoResults/CargandoResults"
-
+import Header from "../../componentes/Header/Header";
+import Buscador from "../../componentes/Buscador/Buscador";
 
 const apikey = "e0100085153d3afdebb4302b39bad2f5";
 
@@ -46,46 +46,51 @@ class SearchResults extends Component {
         }
 
         const busqueda = this.props.match.params.busqueda;
-        
+
         return (
-            <div>
-                <h3 className="alert alert-primary">Resultados para: {busqueda}</h3>
+            <React.Fragment>
+                <Header />
+                <Buscador />
+                
+                <div>
+                    <h3 className="alert alert-primary">Resultados para: {busqueda}</h3>
 
-                <section className="row cards" id="movies">
-                    {this.state.pelis.length === 0 ? (<h3 className="alert alert-primary">No hay reultados</h3>) : (this.state.pelis.map((pelicula) => (
-                        <React.Fragment>
-                            <CardPeliculas
-                                key={pelicula.id}
-                                id={pelicula.id}
-                                tipo="movie"
-                                foto={pelicula.poster_path}
-                                nombre={pelicula.title}
-                                descripcion={pelicula.overview}
-                            />
+                    <section className="row cards" id="movies">
+                        {this.state.pelis.length === 0 ? (<h3 className="alert alert-primary">No hay reultados</h3>) : (this.state.pelis.map((pelicula) => (
+                            <React.Fragment>
+                                <CardPeliculas
+                                    key={pelicula.id}
+                                    id={pelicula.id}
+                                    tipo="movie"
+                                    foto={pelicula.poster_path}
+                                    nombre={pelicula.title}
+                                    descripcion={pelicula.overview}
+                                />
 
-                        </React.Fragment>
+                            </React.Fragment>
 
-                    ))
-                    )}
-                </section>
-                <section className="row cards" id="movies">
-                    {this.state.series.length === 0 ? (<h3 className="alert alert-primary">No hay resultados</h3>) : (this.state.series.map((serie) => (
-                        <React.Fragment>
-                            <CardPeliculas
-                                key={serie.id}
-                                id={serie.id}
-                                tipo="tv"
-                                foto={serie.poster_path}
-                                nombre={serie.name}
-                                descripcion={serie.overview}
-                            />
+                        ))
+                        )}
+                    </section>
+                    <section className="row cards" id="movies">
+                        {this.state.series.length === 0 ? (<h3 className="alert alert-primary">No hay resultados</h3>) : (this.state.series.map((serie) => (
+                            <React.Fragment>
+                                <CardPeliculas
+                                    key={serie.id}
+                                    id={serie.id}
+                                    tipo="tv"
+                                    foto={serie.poster_path}
+                                    nombre={serie.name}
+                                    descripcion={serie.overview}
+                                />
 
-                        </React.Fragment>
+                            </React.Fragment>
 
-                    ))
-                    )}
-                </section>
-            </div>
+                        ))
+                        )}
+                    </section>
+                </div>
+            </React.Fragment>
         );
     }
 }

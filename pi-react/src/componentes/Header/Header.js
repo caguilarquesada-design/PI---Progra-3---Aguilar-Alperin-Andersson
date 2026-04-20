@@ -23,14 +23,13 @@ class Header extends Component {
 
     logout() {
         cookies.remove("user-auth-cookie", { path: "/" });
-        // aca falta algo para que se vaya de arriba los componentes
     }
 
     render() {
         return (
 
             <nav>
-                <img src='./img/imagenlogo.png' alt='logo' />
+                <img className='logo' src='./img/foto-logo.png' alt='logo' />
                 <ul className="nav nav-tabs my-4">
                     <li className='nav-item'>
                         <Link className="nav-link" to='/'>Home</Link>

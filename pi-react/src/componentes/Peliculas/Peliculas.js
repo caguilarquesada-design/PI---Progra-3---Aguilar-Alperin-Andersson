@@ -1,5 +1,9 @@
+import React from "react";
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
+import Header from "../Header/Header";
+import Buscador from "../Buscador/Buscador"
+import {Link} from "react-router-dom";
 
 class PeliculasCartel extends Component {
     constructor(props) {
@@ -17,22 +21,28 @@ class PeliculasCartel extends Component {
             .catch((error) => console.log(error));
     }
 
-    render(){
-        let peliculasHome = this.state.datos.filter((dato,idx)=> idx < 12 );
+    render() {
+        let peliculasHome = this.state.datos.filter((dato, idx) => idx < 12);
 
-        return(
-            <section className="row cards">
-                {peliculasHome.map((dato)=>(
-                    <CardPeliculas
-                    key = {dato.id}
-                    tipo="movie"
-                    id= {dato.id}
-                    foto={dato.poster_path}
-                    nombre={dato.title}
-                    descripcion={dato.overview} 
-                    />
-                ))}
-            </section>
+        return (
+            <React.Fragment>
+                <Header />
+                <Buscador />
+                <h1 className='alert alert-primary'>Películas en cartel</h1>
+                <Link to="/peliculas-cartel">Ver todas</Link>
+                <section className="row cards">
+                    {peliculasHome.map((dato) => (
+                        <CardPeliculas
+                            key={dato.id}
+                            tipo="movie"
+                            id={dato.id}
+                            foto={dato.poster_path}
+                            nombre={dato.title}
+                            descripcion={dato.overview}
+                        />
+                    ))}
+                </section>
+            </React.Fragment>
         );
     }
 }
