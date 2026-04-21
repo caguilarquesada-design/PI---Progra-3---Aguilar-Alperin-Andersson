@@ -1,5 +1,6 @@
 import React from "react";
 import { Component } from "react";
+import Header from "../Header/Header";
 
 class FormRegister extends Component {
     constructor(props) {
@@ -66,6 +67,7 @@ class FormRegister extends Component {
 
         return (
             <React.Fragment>
+                <Header />
                 <h2 className="alert alert-primary">Registro</h2>
                 <div className="row justify-content-center">
                     <div className="col-md-6">
