@@ -1,19 +1,18 @@
 import { Component } from "react";
 import {withRouter} from "react-router-dom";
+import { useState, useEffect, useRef, useContext } from "react";
 
-class Buscador extends Component{
-    constructor(props){
-        super(props)
-        this.state={
-            search: ""
-        }
-    }
-    onSubmit(event){
+function Buscador(props){
+    const [search, setSearch] = useState([]);
+
+}
+
+    const onSubmit = event => {
         event.preventDefault()
         console.log("props de buscador", this.props)
         this.props.history.push("/busqueda/" + this.state.search)
     }
-    guardarBusqueda(event){
+    const guardarBusqueda = event => {
         this.setState(
             {search: event.target.value},
             () => console.log("log desde el setState extendido: ", this.state.search))
@@ -21,7 +20,7 @@ class Buscador extends Component{
                 console.log("el valor del estado es: " , this.state.search)
 }
 
-render(){
+render()
     return(
         <div>
             <form className="search-form" onSubmit={(event) => this.onSubmit(event)}>
@@ -30,7 +29,7 @@ render(){
             </form>
         </div>
     )
-}
-}
+
+
 
 export default withRouter (Buscador);

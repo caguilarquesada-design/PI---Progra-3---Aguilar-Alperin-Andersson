@@ -2,54 +2,50 @@ import React from "react";
 import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
 import Header from "../Header/Header";
+import { useState, useEffect, useRef, useContext } from "react";
 
 
-class VerTodasPeliculas extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            datos: [],
-            backup: [],
-            pagina: 1,
-            filtro: ""
-        };
-    }
-    componentDidMount() {
+function VerTodasPeliculas(props){
+    const [search, setSearch] = useState([]);
+}
+
+   useEffect() 
         this.traerPeliculas();
-    }
+    
 
-    traerPeliculas() {
-        fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
+   UseEffect(() => {
+     fetch(`https://api.themoviedb.org/3/movie/now_playing?api_key=e0100085153d3afdebb4302b39bad2f5&page=${this.state.pagina}`)
             .then((response) => response.json())
-            .then((data) =>
-                this.setState({
-                    datos: this.state.datos.concat(data.results),
-                    backup: this.state.datos.concat(data.results)
-                })
-            )
-            .catch((error) => console.log(error));
-    }
-    controlarInput(event) {
-        this.setState({
-            filtro: event.target.value
-        }, () => this.filtrar(this.state.filtro));
-    }
-    cargarMas() {
-        this.setState(
-            {
-                pagina: this.state.pagina + 1
-            },
+            .then((data) => setSearch(data.results), setSearch(data.results))
+            .catch((error) => console.log(error))
+
+   }, []) 
+       
+    
+controlarInput (() => {
+         setFiltro(target.value)
+        ; () => this.filtrar(this.state.filtro);
+   }, [] )
+
+    
+       
+   useState(() => {
+    setPagina(this.state.pagina + 1);
             () => this.traerPeliculas()
-        );
-    }
-    filtrar(inputUsuario) {
+        ;
+
+   }) 
+        
+    useEffect((inputUsuario) => {
         let peliculasFiltradas = this.state.backup.filter((dato) => dato.title.toLowerCase().includes(inputUsuario.toLowerCase()));
         console.log('filtradas', peliculasFiltradas)
         this.setState({ datos: peliculasFiltradas })
-    }
 
-    render() {
+    }, [])
+        
 
+
+    render() 
         return (
             <React.Fragment>
                 <Header />
@@ -81,8 +77,7 @@ class VerTodasPeliculas extends Component {
                 </section>
             </React.Fragment>
         );
-    }
-}
+    
 export default VerTodasPeliculas;
 
 
