@@ -3,31 +3,22 @@ import { Component } from "react";
 import CardPeliculas from "../CardPeliculas/CardPeliculas";
 import Header from "../Header/Header";
 import Buscador from "../Buscador/Buscador";
+import { useState, useEffect, useRef, useContext } from "react";
 import {Link} from "react-router-dom";
 
-class PeliculasPopulares extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            datos: []
-        };
-    }
+function PeliculasPopulares (props) {
+    const [datos, setDatos] = useState([]);
+    
+        useEffect(() => {
+                fetch('https://api.themoviedb.org/3/tv/popular?api_key=e0100085153d3afdebb4302b39bad2f5')
+                    .then(response => response.json())
+                    .then((data) => setDatos(data.results))
+                    .catch(error => console.log(error))
+            }, [])
 
-    componentDidMount() {
-        fetch('https://api.themoviedb.org/3/tv/popular?api_key=e0100085153d3afdebb4302b39bad2f5')
-            .then((response) => response.json())
-            .then((data) => this.setState(
-                { datos: data.results },
+            let peliculasHome = datos.filter((dato, idx) => idx < 12);
 
-            ))
-            .catch((error) => console.log(error));
-    }
-
-    render() {
-
-        let peliculasHome = this.state.datos.filter((dato, idx) => idx < 12);
-
-        return (
+    return(
             <React.Fragment>
                 <Header />
                 <Buscador />
@@ -46,8 +37,7 @@ class PeliculasPopulares extends Component {
                     ))}
                 </section>
             </React.Fragment>
-        );
-    }
+    )
 }
 
 export default PeliculasPopulares;
